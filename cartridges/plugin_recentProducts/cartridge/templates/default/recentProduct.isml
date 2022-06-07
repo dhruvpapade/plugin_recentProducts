@@ -1,0 +1,65 @@
+<isif condition="${pdict.result.list.length > 0}">
+
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-12 text-center">
+                    <h1>Recently View Products</h1>
+                </div>
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+				<!-- Carousel indicators -->
+
+				<!-- Wrapper for carousel items -->
+				<div class="carousel-inner">		   
+					<isloop items="${pdict.result.list.items}" var="product" status="listindex">
+				
+						<isif condition="${(listindex.index % 4) == 0.0 }">
+								<div class="item carousel-item <isif condition="${listindex.index == 0}">active</isif>">
+									<div class="row">
+						</isif>
+										<div class="col-sm-3">
+											<div class="thumb-wrapper">
+												<span class="remove-icon" data-url="${pdict.result.removeUrl}" data-pid="${product.pid}"><i class="fa fa-times"></i></span>
+												<div class="img-box">
+													<img src="${product.imageObj.small[0].absURL}" class="img-fluid" alt="">									
+												</div>
+												<div class="thumb-content">
+													<h4>${product.name}</h4>	
+													
+													<!-- Prices -->
+													<div class="prices">
+														<isset name="price" value="${product.priceObj}" scope="page" />
+														<isinclude template="product/components/pricing/main" />
+													</div>
+
+													<a href="${product.url}" class="btn btn-primary">View Deatils</a>
+												</div>						
+											</div>
+										</div>					
+						<isif condition="${(listindex.index % 4) == 3.0}">
+									</div>
+								</div>
+						</isif>
+
+					</isloop>
+
+					<isif condition="${(pdict.result.list.length % 4) != 0.0}">
+							</div>
+						</div>
+					</isif>
+
+				</div>
+
+				<!-- Carousel controls -->
+				<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+					<i class="fa fa-angle-left"></i>
+				</a>
+				<a class="carousel-control-next" href="#myCarousel" data-slide="next">
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</div>
+			</div>
+		</div>
+	</div>
+</isif>
+      
